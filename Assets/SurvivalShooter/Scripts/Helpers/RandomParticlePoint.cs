@@ -1,14 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class RandomParticlePoint : MonoBehaviour 
 {
-    [Range(0f, 1f)]
-    public float normalizedTime;
-
-
+    [Range(0f, 1f), SerializeField]
+    private float normalizedTime;
+    
     void OnValidate()
     {
-        GetComponent<ParticleSystem>().Simulate (normalizedTime, true, true);
+        GetComponent<ParticleSystem>().Simulate(normalizedTime, true, true);
     }
 }

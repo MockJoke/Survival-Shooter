@@ -1,15 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
-
-public class VolumeHandler : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () 
+public class VolumeHandler : MonoBehaviour 
+{
+	void Start() 
 	{
 		if(GameObject.Find("EffectsSlider"))
-		GameObject.Find("EffectsSlider").GetComponent<Slider>().onValueChanged.AddListener(SetVolume);
+			GameObject.Find("EffectsSlider").GetComponent<Slider>().onValueChanged.AddListener(SetVolume);
 	}
 
 	void SetVolume(float volume)
@@ -20,6 +17,6 @@ public class VolumeHandler : MonoBehaviour {
 	void OnDestroy()
 	{
 		if(GameObject.Find("EffectsSlider"))
-		GameObject.Find("EffectsSlider").GetComponent<Slider>().onValueChanged.RemoveListener(SetVolume);
+			GameObject.Find("EffectsSlider").GetComponent<Slider>().onValueChanged.RemoveListener(SetVolume);
 	}
 }

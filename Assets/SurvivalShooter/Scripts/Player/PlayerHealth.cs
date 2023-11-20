@@ -1,107 +1,107 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int startingHealth = 100;                            // The amount of health the player starts the game with.
-    public int currentHealth;                                   // The current health the player has.
-    public Slider healthSlider;                                 // Reference to the UI's health bar.
-    public Image damageImage;                                   // Reference to an image to flash on the screen on being hurt.
-    public AudioClip deathClip;                                 // The audio clip to play when the player dies.
-    public float flashSpeed = 5f;                               // The speed the damageImage will fade at.
-    public Color flashColour = new Color(1f, 0f, 0f, 0.1f);     // The colour the damageImage is set to, to flash.
+    [SerializeField] private int startingHealth = 100;                            // The amount of health the player starts the game with
+    public int currentHealth;                                                     // The current health the player has
+    [SerializeField] private Slider healthSlider;                                 // Reference to the UI's health bar.
+    [SerializeField] private Image damageImage;                                   // Reference to an image to flash on the screen on being hurt
+    [SerializeField] private AudioClip deathClip;                                 // The audio clip to play when the player dies
+    [SerializeField] private float flashSpeed = 5f;                               // The speed the damageImage will fade at
+    [SerializeField] private Color flashColour = new Color(1f, 0f, 0f, 0.1f);     // The colour the damageImage is set to, to flash
+    
+    [SerializeField] private Animator anim;                                              // Reference to the Animator component
+    [SerializeField] private AudioSource playerAudio;                                    // Reference to the AudioSource component
+    [SerializeField] private PlayerMovement playerMovement;                              // Reference to the player's movement
+    [SerializeField] private PlayerShooting playerShooting;                              // Reference to the PlayerShooting script
+    private bool isDead;                                                // Whether the player is dead
+    private bool damaged;                                               // True when the player gets damaged
 
-
-    Animator anim;                                              // Reference to the Animator component.
-    AudioSource playerAudio;                                    // Reference to the AudioSource component.
-    PlayerMovement playerMovement;                              // Reference to the player's movement.
-    PlayerShooting playerShooting;                              // Reference to the PlayerShooting script.
-    bool isDead;                                                // Whether the player is dead.
-    bool damaged;                                               // True when the player gets damaged.
-
-
-    void Awake ()
+    void Awake()
     {
-        // Setting up the references.
-        anim = GetComponent <Animator> ();
-        playerAudio = GetComponent <AudioSource> ();
-        playerMovement = GetComponent <PlayerMovement> ();
-        playerShooting = GetComponentInChildren <PlayerShooting> ();
+        // Setting up the references
+        if (anim == null)
+            anim = GetComponent <Animator>();
+        
+        if (playerAudio == null)
+            playerAudio = GetComponent <AudioSource>();
+        
+        if (playerMovement == null)
+            playerMovement = GetComponent<PlayerMovement>();
+        
+        if (playerShooting == null)
+            playerShooting = GetComponentInChildren<PlayerShooting>();
 
-        // Set the initial health of the player.
+        // Set the initial health of the player
         currentHealth = startingHealth;
     }
-
-
-    void Update ()
+    
+    void Update()
     {
         // If the player has just been damaged...
         if(damaged)
         {
-            // ... set the colour of the damageImage to the flash colour.
+            // ... set the colour of the damageImage to the flash colour
             damageImage.color = flashColour;
         }
         // Otherwise...
         else
         {
-            // ... transition the colour back to clear.
-            damageImage.color = Color.Lerp (damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
+            // ... transition the colour back to clear
+            damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
         }
 
-        // Reset the damaged flag.
+        // Reset the damaged flag
         damaged = false;
     }
-
-
-    public void TakeDamage (int amount)
+    
+    public void TakeDamage(int amount)
     {
-        // Set the damaged flag so the screen will flash.
+        // Set the damaged flag so the screen will flash
         damaged = true;
 
-        // Reduce the current health by the damage amount.
+        // Reduce the current health by the damage amount
         currentHealth -= amount;
 
-        // Set the health bar's value to the current health.
+        // Set the health bar's value to the current health
         healthSlider.value = currentHealth;
 
-        // Play the hurt sound effect.
-        playerAudio.Play ();
+        // Play the hurt sound effect
+        playerAudio.Play();
 
         // If the player has lost all it's health and the death flag hasn't been set yet...
         if(currentHealth <= 0 && !isDead)
         {
-            // ... it should die.
-            Death ();
+            // ... it should die
+            Death();
         }
     }
-
-
-    void Death ()
+    
+    void Death()
     {
-        // Set the death flag so this function won't be called again.
+        // Set the death flag so this function won't be called again
         isDead = true;
 
-        // Turn off any remaining shooting effects.
-        playerShooting.DisableEffects ();
+        // Turn off any remaining shooting effects
+        playerShooting.DisableEffects();
 
-        // Tell the animator that the player is dead.
-        anim.SetTrigger ("Die");
+        // Tell the animator that the player is dead
+        anim.SetTrigger("Die");
 
-        // Set the audiosource to play the death clip and play it (this will stop the hurt sound from playing).
+        // Set the audiosource to play the death clip and play it (this will stop the hurt sound from playing)
         playerAudio.clip = deathClip;
-        playerAudio.Play ();
+        playerAudio.Play();
 
-        // Turn off the movement and shooting scripts.
+        // Turn off the movement and shooting scripts
         playerMovement.enabled = false;
         playerShooting.enabled = false;
     }
-
-
-    public void RestartLevel ()
+    
+    public void RestartLevel()
     {
-        // Reload the level that is currently loaded.
+        // Reload the level that is currently loaded
         SceneManager.LoadScene (0);
     }
 }

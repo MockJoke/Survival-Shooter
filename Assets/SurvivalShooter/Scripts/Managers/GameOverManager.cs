@@ -2,25 +2,22 @@
 
 public class GameOverManager : MonoBehaviour
 {
-    public PlayerHealth playerHealth;       // Reference to the player's health.
-
-
-    Animator anim;                          // Reference to the animator component.
-
-
-    void Awake ()
+    [SerializeField] private PlayerHealth playerHealth;       // Reference to the player's health
+    [SerializeField] private Animator anim;                   // Reference to the animator component
+    
+    void Awake()
     {
-        // Set up the reference.
-        anim = GetComponent <Animator> ();
+        // Set up the reference
+        if (anim == null)
+            anim = GetComponent <Animator> ();
     }
 
-
-    void Update ()
+    void Update()
     {
         // If the player has run out of health...
         if(playerHealth.currentHealth <= 0)
         {
-            // ... tell the animator the game is over.
+            // ... tell the animator the game is over
             anim.SetTrigger ("GameOver");
         }
     }

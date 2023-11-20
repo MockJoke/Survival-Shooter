@@ -1,21 +1,19 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
 using UnityEngine.Audio;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
-public class PauseManager : MonoBehaviour {
-	
-	public AudioMixerSnapshot paused;
-	public AudioMixerSnapshot unpaused;
-	
-	Canvas canvas;
-	
-	void Start()
+public class PauseManager : MonoBehaviour 
+{
+	[SerializeField] private AudioMixerSnapshot paused;
+	[SerializeField] private AudioMixerSnapshot unpaused;
+	[SerializeField] private Canvas canvas;
+
+	void Awake()
 	{
-		canvas = GetComponent<Canvas>();
+		if (canvas == null)
+			canvas = GetComponent<Canvas>();
 	}
 	
 	void Update()
@@ -30,8 +28,7 @@ public class PauseManager : MonoBehaviour {
 	public void Pause()
 	{
 		Time.timeScale = Time.timeScale == 0 ? 1 : 0;
-		Lowpass ();
-		
+		Lowpass();
 	}
 	
 	void Lowpass()
@@ -40,9 +37,7 @@ public class PauseManager : MonoBehaviour {
 		{
 			paused.TransitionTo(.01f);
 		}
-		
 		else
-			
 		{
 			unpaused.TransitionTo(.01f);
 		}
