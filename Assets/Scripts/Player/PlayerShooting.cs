@@ -10,7 +10,7 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] private LineRenderer gunLine;                           // Reference to the line renderer
     [SerializeField] private AudioSource gunAudio;                           // Reference to the audio source
     [SerializeField] private Light gunLight;                                 // Reference to the light component
-    [SerializeField] private Light faceLight;								// Duh
+    [SerializeField] private Light faceLight;
     
     private float timer;                                    // A timer to determine when to fire
     private Ray shootRay = new Ray();                       // A ray from the gun end forwards
@@ -35,6 +35,7 @@ public class PlayerShooting : MonoBehaviour
         
         if (gunLight == null)
             gunLight = GetComponent<Light>();
+        
         //faceLight = GetComponentInChildren<Light>();
     }
     
@@ -44,7 +45,7 @@ public class PlayerShooting : MonoBehaviour
         timer += Time.deltaTime;
 
 #if !MOBILE_INPUT
-        // If the Fire1 button is being press and it's time to fire...
+        // If the Fire1 button is being pressed and it's time to fire...
         if(Input.GetButton("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
         {
             // ... shoot the gun
