@@ -5,17 +5,19 @@ using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private int startingHealth = 100;                            // The amount of health the player starts the game with
-    public int currentHealth;                                                     // The current health the player has
+    [HideInInspector] public int currentHealth;                                   // The current health the player has
     [SerializeField] private Slider healthSlider;                                 // Reference to the UI's health bar.
     [SerializeField] private Image damageImage;                                   // Reference to an image to flash on the screen on being hurt
-    [SerializeField] private AudioClip deathClip;                                 // The audio clip to play when the player dies
     [SerializeField] private float flashSpeed = 5f;                               // The speed the damageImage will fade at
     [SerializeField] private Color flashColour = new Color(1f, 0f, 0f, 0.1f);     // The colour the damageImage is set to, to flash
+    [SerializeField] private AudioClip deathClip;                                 // The audio clip to play when the player dies
     
+    [Header("Components")]
     [SerializeField] private Animator anim;                                              // Reference to the Animator component
     [SerializeField] private AudioSource playerAudio;                                    // Reference to the AudioSource component
     [SerializeField] private PlayerMovement playerMovement;                              // Reference to the player's movement
     [SerializeField] private PlayerShooting playerShooting;                              // Reference to the PlayerShooting script
+    
     private bool isDead;                                                // Whether the player is dead
     private bool damaged;                                               // True when the player gets damaged
 
