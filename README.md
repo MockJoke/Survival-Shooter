@@ -7,7 +7,7 @@ A simple 3D survival shooter game made using Unity Engine
 [//]: # ([Play on itch]&#40;https://mockjoke.itch.io/pixel-adventure&#41;)
 
 <p align="center">
-    <img src="README-Resources/Gameplay.png" alt="Start-Screen" width="300px">
+    <img src="README-Resources/Gameplay.png" alt="Start-Screen" width="500px">
 
 [//]: # (    <img src="README-Resources/CharacterSelection-Menu.png" alt="CharacterSelection-Menu" width="300px">)
 </p>
