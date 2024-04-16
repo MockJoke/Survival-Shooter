@@ -18,17 +18,17 @@ public class PauseManager : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
 			canvas.enabled = !canvas.enabled;
-			Pause();
+			TogglePause();
 		}
 	}
 	
-	public void Pause()
+	public void TogglePause()
 	{
 		Time.timeScale = Time.timeScale == 0 ? 1 : 0;
-		Lowpass();
+		LowPassAudio();
 	}
 	
-	void Lowpass()
+	private void LowPassAudio()
 	{
 		if (Time.timeScale == 0)
 		{
