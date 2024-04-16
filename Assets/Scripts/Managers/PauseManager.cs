@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 public class PauseManager : MonoBehaviour 
 {
@@ -41,14 +38,5 @@ public class PauseManager : MonoBehaviour
 		{
 			unpaused.TransitionTo(.01f);
 		}
-	}
-	
-	public void Quit()
-	{
-		#if UNITY_EDITOR 
-		EditorApplication.isPlaying = false;
-		#else 
-		Application.Quit();
-		#endif
 	}
 }
