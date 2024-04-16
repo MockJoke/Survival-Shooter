@@ -3,14 +3,14 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static int score;        // The player's score
-    [SerializeField] private Text text;                      // Reference to the Text component
+    public static int score;                                // The player's score
+    [SerializeField] private Text scoreText;                // Reference to the Text component
 
     void Awake()
     {
         // Set up the reference
-        if (text == null)
-            text = GetComponent <Text> ();
+        if (scoreText == null)
+            scoreText = GetComponent<Text>();
 
         // Reset the score
         score = 0;
@@ -19,6 +19,6 @@ public class ScoreManager : MonoBehaviour
     void Update()
     {
         // Set the displayed text to be the word "Score" followed by the score value
-        text.text = "Score: " + score;
+        scoreText.text = "Score: " + score;
     }
 }

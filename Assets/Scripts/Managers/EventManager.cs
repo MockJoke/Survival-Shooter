@@ -39,10 +39,12 @@ public class EventManager : MonoBehaviour
         {
             eventDictionaryVector = new Dictionary<string, UnityEvent<Vector3>>();
         }
+        
         if (eventDictionaryBool == null)
         {
             eventDictionaryBool = new Dictionary<string, UnityEvent<bool>>();
         }
+        
         if (eventDictionaryNull == null)
         {
             eventDictionaryNull = new Dictionary<string, UnityEvent>();

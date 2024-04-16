@@ -1,12 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class VolumeHandler : MonoBehaviour 
+public class VolumeHandler : MonoBehaviour
 {
+	[SerializeField] private Slider effectsSlider;
+
+	void Awake()
+	{
+		if (effectsSlider == null)
+			effectsSlider = GameObject.Find("EffectsSlider").GetComponent<Slider>();
+	}
+
 	void Start() 
 	{
-		if(GameObject.Find("EffectsSlider"))
-			GameObject.Find("EffectsSlider").GetComponent<Slider>().onValueChanged.AddListener(SetVolume);
+		effectsSlider.onValueChanged.AddListener(SetVolume);
 	}
 
 	void SetVolume(float volume)
@@ -16,7 +23,6 @@ public class VolumeHandler : MonoBehaviour
 
 	void OnDestroy()
 	{
-		if(GameObject.Find("EffectsSlider"))
-			GameObject.Find("EffectsSlider").GetComponent<Slider>().onValueChanged.RemoveListener(SetVolume);
+		effectsSlider.onValueChanged.RemoveListener(SetVolume);
 	}
 }

@@ -9,11 +9,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Animator anim;                      // Reference to the animator component
     [SerializeField] private Rigidbody playerRigidbody;          // Reference to the player's rigidbody
     
-    private Vector3 movement;                   // The vector to store the direction of the player's movement
+    private Vector3 movement;                                   // The vector to store the direction of the player's movement
     
 #if !MOBILE_INPUT
-    private int floorMask;                      // A layer mask so that a ray can be cast just at gameobjects on the floor layer
-    private readonly float camRayLength = 100f;          // The length of the ray from the camera into the scene
+    private int floorMask;                                      // A layer mask so that a ray can be cast just at gameobjects on the floor layer
+    private readonly float camRayLength = 100f;                 // The length of the ray from the camera into the scene
 #endif
 
     void Awake()

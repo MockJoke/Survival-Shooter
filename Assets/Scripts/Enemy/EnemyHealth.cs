@@ -9,6 +9,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private int scoreValue = 10;                 // The amount added to the player's score when the enemy dies
     [SerializeField] private AudioClip deathClip;                 // The sound to play when the enemy dies
     
+    [Header("Components")]
     [SerializeField] private Animator anim;                              // Reference to the animator
     [SerializeField] private AudioSource enemyAudio;                     // Reference to the audio source
     [SerializeField] private ParticleSystem hitParticles;                // Reference to the particle system that plays when the enemy is damaged
@@ -17,6 +18,8 @@ public class EnemyHealth : MonoBehaviour
     
     private bool isDead;                                // Whether the enemy is dead
     private bool isSinking;                             // Whether the enemy has started sinking through the floor
+    
+    private static readonly int deadAnim = Animator.StringToHash("Dead");
 
     void Awake()
     {
@@ -120,7 +123,7 @@ public class EnemyHealth : MonoBehaviour
         capsuleCollider.isTrigger = true;
 
         // Tell the animator that the enemy is dead
-        anim.SetTrigger("Dead");
+        anim.SetTrigger(deadAnim);
 
         // Change the audio clip of the audio source to the death clip and play it (this will stop the hurt clip playing)
         enemyAudio.clip = deathClip;

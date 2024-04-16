@@ -7,6 +7,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GameObject enemy;                // The enemy prefab to be spawned
     [SerializeField] private float spawnTime = 3f;            // How long between each spawn
     [SerializeField] private Transform[] spawnPoints;         // An array of the spawn points this enemy can spawn from
+    
     private float timer = 0;
     
     void Start()

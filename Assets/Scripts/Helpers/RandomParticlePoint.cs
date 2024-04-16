@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
+[Obsolete]
 public class RandomParticlePoint : MonoBehaviour 
 {
     [Range(0f, 1f), SerializeField]
