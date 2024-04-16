@@ -1,16 +1,16 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using TMPro;
+using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
     public static int score;                                // The player's score
-    [SerializeField] private Text scoreText;                // Reference to the Text component
+    [SerializeField] private TextMeshProUGUI scoreText;                // Reference to the Text component
 
     void Awake()
     {
         // Set up the reference
         if (scoreText == null)
-            scoreText = GetComponent<Text>();
+            scoreText = GetComponent<TextMeshProUGUI>();
 
         // Reset the score
         score = 0;
