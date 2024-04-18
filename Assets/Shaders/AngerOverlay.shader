@@ -1,4 +1,4 @@
-﻿Shader "Effects/AdditiveImage"
+﻿Shader "Custom/AdditiveImage"
 {
 	Properties
 	{
