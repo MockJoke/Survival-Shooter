@@ -20,7 +20,7 @@ A simple 3D survival shooter game made using Unity Engine
 - [ ] Upgrade to new input system
 - [ ] Waves based spawning
 - [ ] Different ability boosting pickups
-- [ ] Healthbar on Enemy
+- [x] Floating healthbars on Enemy
 - [ ] UI/UX + Visual Effects update
 
 ## Credits & Attributions
