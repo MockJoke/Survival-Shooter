@@ -1,29 +1,34 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] private int startingHealth = 100;            // The amount of health the enemy starts the game with
+    [SerializeField] private int initHealth = 100;                // The amount of health the enemy starts the game with
     public int currentHealth;                                     // The current health the enemy has
     [SerializeField] private float sinkSpeed = 2.5f;              // The speed at which the enemy sinks through the floor when dead
     [SerializeField] private int scoreValue = 10;                 // The amount added to the player's score when the enemy dies
     [SerializeField] private AudioClip deathClip;                 // The sound to play when the enemy dies
+
+    [Header("HealthBar UI")] 
+    [SerializeField] private GameObject healthBarPrefab;
+    private Slider healthBarSlider;
+    private GameObject enemyHealthCanvas;
     
     [Header("Components")]
-    [SerializeField] private Animator anim;                              // Reference to the animator
-    [SerializeField] private AudioSource enemyAudio;                     // Reference to the audio source
-    [SerializeField] private ParticleSystem hitParticles;                // Reference to the particle system that plays when the enemy is damaged
-    [SerializeField] private CapsuleCollider capsuleCollider;            // Reference to the capsule collider
+    [SerializeField] private Animator anim;
+    [SerializeField] private AudioSource enemyAudio;
+    [SerializeField] private ParticleSystem hitParticles;
+    [SerializeField] private CapsuleCollider capsuleCollider;
     [SerializeField] private EnemyMovement enemyMovement;
     
-    private bool isDead;                                // Whether the enemy is dead
-    private bool isSinking;                             // Whether the enemy has started sinking through the floor
+    // private bool isDead;
+    private bool isSinking;
     
     private static readonly int deadAnim = Animator.StringToHash("Dead");
 
     void Awake()
     {
-        // Setting up the references
         if (anim == null)
             anim = GetComponent<Animator>();
         
@@ -38,12 +43,17 @@ public class EnemyHealth : MonoBehaviour
 
         if (enemyMovement == null)
             enemyMovement = GetComponent<EnemyMovement>();
+
+        if (enemyHealthCanvas == null)
+            enemyHealthCanvas = GameObject.FindGameObjectWithTag("EnemyHealthCanvas");
     }
 
     void OnEnable()
     {
-        // Setting the current health when the enemy first spawns
-        currentHealth = startingHealth;
+        currentHealth = initHealth;
+
+        healthBarSlider = Instantiate(healthBarPrefab, gameObject.transform.position, Quaternion.identity, enemyHealthCanvas.transform).GetComponent<Slider>();
+        healthBarSlider.gameObject.SetActive(false);
     }
 
     void Update()
@@ -58,6 +68,11 @@ public class EnemyHealth : MonoBehaviour
             {
                 Destroy(this.gameObject);
             }
+        }
+
+        if (!IsDead())
+        {
+            UpdateHealthBarPos();
         }
     }
     
@@ -106,6 +121,9 @@ public class EnemyHealth : MonoBehaviour
         {
             enemyAudio.Play();
             currentHealth -= amount;
+            
+            healthBarSlider.gameObject.SetActive(true);
+            healthBarSlider.value = (int)Mathf.Round(((float)currentHealth / (float)initHealth) * 100);
 
             if (IsDead())
             {
@@ -118,6 +136,8 @@ public class EnemyHealth : MonoBehaviour
     {
         // The enemy is dead
         // isDead = true;
+        
+        Destroy(healthBarSlider.gameObject);
 
         // Turn the collider into a trigger so shots can pass through it
         capsuleCollider.isTrigger = true;
@@ -146,5 +166,14 @@ public class EnemyHealth : MonoBehaviour
 
         // After 2 seconds destroy the enemy
         Destroy(gameObject, 2f);
+    }
+
+    private void UpdateHealthBarPos()
+    {
+        if (Camera.main != null)
+        {
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+            healthBarSlider.transform.position = screenPos + new Vector3(0, 100, 0);
+        }
     }
 }
