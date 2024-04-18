@@ -10142,6 +10142,7 @@ MonoBehaviour:
   sinkSpeed: 2.5
   scoreValue: 10
   deathClip: {fileID: 8300000, guid: 8c615fd0429f34edf85539d70279360d, type: 3}
+  healthBarPrefab: {fileID: 100004, guid: 25a2fff7d6401e042a22ea5b08e685d1, type: 3}
   anim: {fileID: 9583922}
   enemyAudio: {fileID: 8279214}
   hitParticles: {fileID: 19897060}

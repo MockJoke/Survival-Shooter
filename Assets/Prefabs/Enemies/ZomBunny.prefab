@@ -261,6 +261,7 @@ MonoBehaviour:
   sinkSpeed: 2.5
   scoreValue: 10
   deathClip: {fileID: 8300000, guid: 1d3bfb9269f136947bf8ac164cace1ff, type: 3}
+  healthBarPrefab: {fileID: 100004, guid: 25a2fff7d6401e042a22ea5b08e685d1, type: 3}
   anim: {fileID: 9500000}
   enemyAudio: {fileID: 8200000}
   hitParticles: {fileID: 19800000}
@@ -409,6 +410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f58c1d9ce56e1749830b8aebe8ba3bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectsSlider: {fileID: 0}
 --- !u!1 &100004
 GameObject:
   m_ObjectHideFlags: 0
