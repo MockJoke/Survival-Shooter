@@ -18,7 +18,6 @@ public class EnemyAttack : MonoBehaviour
 
     void Awake()
     {
-        // Setting up the references
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player");
         

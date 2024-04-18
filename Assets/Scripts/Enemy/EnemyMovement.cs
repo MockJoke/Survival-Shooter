@@ -9,7 +9,6 @@ public class EnemyMovement : MonoBehaviour
     
     void Awake()
     {
-        // Set up the references
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player").transform;
         
