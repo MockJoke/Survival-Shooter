@@ -162,7 +162,8 @@ public class EnemyHealth : MonoBehaviour
         isSinking = true;
 
         // Increase the score by the enemy's score value
-        ScoreManager.score += scoreValue;
+        // ScoreManager.score += scoreValue;
+        ScoreManager.OnScoreChange(scoreValue);
 
         // After 2 seconds destroy the enemy
         Destroy(gameObject, 2f);
