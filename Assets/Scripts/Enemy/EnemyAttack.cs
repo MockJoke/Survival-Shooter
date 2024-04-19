@@ -3,13 +3,14 @@
 public class EnemyAttack : MonoBehaviour
 {
     [SerializeField] private float timeBetweenAttacks = 0.5f;     // The time in seconds between each attack
-    [SerializeField] private int attackDamage = 10;               // The amount of health taken away per attack
+    [SerializeField] private int attackDamage = 10;               // The amount of health taken away by player per attack
     
     [Header("Components")]
-    [SerializeField] private Animator anim;                              // Reference to the animator component
-    [SerializeField] private GameObject player;                          // Reference to the player GameObject
-    [SerializeField] private PlayerHealth playerHealth;                  // Reference to the player's health
-    [SerializeField] private EnemyHealth enemyHealth;                    // Reference to this enemy's health
+    [SerializeField] private Animator anim;
+    [SerializeField] private EnemyHealth enemyHealth;
+    
+    private GameObject player;
+    private PlayerHealth playerHealth;
     
     private bool playerInRange;                                 // Whether player is within the trigger collider and can be attacked
     private float timer;                                        // Timer for counting up to the next attack

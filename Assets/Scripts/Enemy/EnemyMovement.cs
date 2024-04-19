@@ -2,10 +2,11 @@
 
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField] private Transform player;
-    [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private EnemyHealth enemyHealth;
     [SerializeField] private UnityEngine.AI.NavMeshAgent nav;
+    
+    private Transform player;
+    private PlayerHealth playerHealth;
     
     void Awake()
     {
