@@ -1,14 +1,16 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private int initHealth = 100;                // The amount of health the enemy starts the game with
-    public int currentHealth;                                     // The current health the enemy has
-    [SerializeField] private float sinkSpeed = 2.5f;              // The speed at which the enemy sinks through the floor when dead
+    public int currentHealth { get; private set; }                // The current health the enemy has
+    // [SerializeField] private float sinkSpeed = 2.5f;              // The speed at which the enemy sinks through the floor when dead
     [SerializeField] private int scoreValue = 10;                 // The amount added to the player's score when the enemy dies
     [SerializeField] private AudioClip deathClip;                 // The sound to play when the enemy dies
+    [SerializeField] private AudioClip burnClip;                  // The sound to play when the enemy is burning
 
     [Header("HealthBar UI")] 
     [SerializeField] private GameObject healthBarPrefab;
@@ -19,11 +21,10 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private Animator anim;
     [SerializeField] private AudioSource enemyAudio;
     [SerializeField] private ParticleSystem hitParticles;
+    [SerializeField] private ParticleSystem deathParticles;
     [SerializeField] private CapsuleCollider capsuleCollider;
     [SerializeField] private EnemyMovement enemyMovement;
-    
-    // private bool isDead;
-    private bool isSinking;
+    [SerializeField] private SkinnedMeshRenderer bodyMeshRenderer;
     
     private static readonly int deadAnim = Animator.StringToHash("Dead");
 
@@ -35,8 +36,8 @@ public class EnemyHealth : MonoBehaviour
         if (enemyAudio == null)
             enemyAudio = GetComponent<AudioSource>();
         
-        if (hitParticles == null)
-            hitParticles = GetComponentInChildren<ParticleSystem>();
+        // if (hitParticles == null)
+        //     hitParticles = GetComponentInChildren<ParticleSystem>();
         
         if (capsuleCollider == null)
             capsuleCollider = GetComponent<CapsuleCollider>();
@@ -46,6 +47,9 @@ public class EnemyHealth : MonoBehaviour
 
         if (enemyHealthCanvas == null)
             enemyHealthCanvas = GameObject.FindGameObjectWithTag("EnemyHealthCanvas");
+
+        if (bodyMeshRenderer == null)
+            bodyMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
     }
 
     void OnEnable()
@@ -58,18 +62,6 @@ public class EnemyHealth : MonoBehaviour
 
     void Update()
     {
-        // If the enemy should be sinking...
-        if(isSinking)
-        {
-            // ... move the enemy down by the sinkSpeed per second
-            transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime);
-            
-            if (transform.position.y < -10f)
-            {
-                Destroy(this.gameObject);
-            }
-        }
-
         if (!IsDead())
         {
             UpdateHealthBarPos();
@@ -137,36 +129,49 @@ public class EnemyHealth : MonoBehaviour
         // The enemy is dead
         // isDead = true;
         
-        Destroy(healthBarSlider.gameObject);
-
-        // Turn the collider into a trigger so shots can pass through it
-        capsuleCollider.isTrigger = true;
-
         // Tell the animator that the enemy is dead
         anim.SetTrigger(deadAnim);
-
+        
         // Change the audio clip of the audio source to the death clip and play it (this will stop the hurt clip playing)
         enemyAudio.clip = deathClip;
         enemyAudio.Play();
-    }
-    
-    public void StartSinking()
-    {
+        
         // Find and disable the Nav Mesh Agent
         GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
-
+        
         // Find the rigidbody component and make it kinematic (since we use Translate to sink the enemy)
         GetComponent<Rigidbody>().isKinematic = true;
-
-        // The enemy should not sink
-        isSinking = true;
-
+        
+        // Turn the collider into a trigger so shots can pass through it
+        capsuleCollider.isTrigger = true;
+        
         // Increase the score by the enemy's score value
         // ScoreManager.score += scoreValue;
         ScoreManager.OnScoreChange(scoreValue);
+        
+        Destroy(healthBarSlider.gameObject);
+        
+        StartCoroutine(StartBurning());
+    }
+    
+    IEnumerator StartBurning()
+    {
+        yield return new WaitForSeconds(1f);
 
+        // while (transform.position.y > -10f)
+        // {
+        //     // ... move the enemy down by the sinkSpeed per second
+        //     transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime);
+        // }
+        
+        deathParticles.Play();
+        
+        // Change the audio clip of the audio source to the burn clip and play it (this will stop the death clip playing)
+        enemyAudio.clip = burnClip;
+        enemyAudio.Play();
+        
         // After 2 seconds destroy the enemy
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 1.5f);
     }
 
     private void UpdateHealthBarPos()

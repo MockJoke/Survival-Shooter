@@ -5159,7 +5159,6 @@ MonoBehaviour:
   gameOverText: {fileID: 1827425459}
   screenFader: {fileID: 1334548032}
   playerHealth: {fileID: 176715526}
-  anim: {fileID: 1139190137}
 --- !u!1 &1837071935
 GameObject:
   m_ObjectHideFlags: 0
