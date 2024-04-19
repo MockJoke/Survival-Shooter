@@ -2,10 +2,10 @@
 
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField] private Transform player;                              // Reference to the player's position
-    [SerializeField] private PlayerHealth playerHealth;                     // Reference to the player's health
-    [SerializeField] private EnemyHealth enemyHealth;                       // Reference to this enemy's health
-    [SerializeField] private UnityEngine.AI.NavMeshAgent nav;               // Reference to the nav mesh agent
+    [SerializeField] private Transform player;
+    [SerializeField] private PlayerHealth playerHealth;
+    [SerializeField] private EnemyHealth enemyHealth;
+    [SerializeField] private UnityEngine.AI.NavMeshAgent nav;
     
     void Awake()
     {
@@ -24,16 +24,12 @@ public class EnemyMovement : MonoBehaviour
     
     void Update()
     {
-        // If the enemy and the player have health left...
         if(enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
         {
-            // ... set the destination of the nav mesh agent to the player
             nav.SetDestination(player.position);
         }
-        // Otherwise...
         else
         {
-            // ... disable the nav mesh agent
             nav.enabled = false;
         }
     }

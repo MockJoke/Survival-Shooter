@@ -31,10 +31,8 @@ public class EnemyManager : MonoBehaviour
 
     void Spawn()
     {
-        // If the player has no health left...
         if(playerHealth.currentHealth <= 0f)
         {
-            // ... exit the function
             return;
         }
 
