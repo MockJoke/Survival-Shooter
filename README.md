@@ -18,10 +18,11 @@ A simple 3D survival shooter game made using Unity Engine
 
 - [x] Add home & pause screens
 - [ ] Upgrade to new input system
-- [ ] Waves based spawning
+- [x] Wave based enemy spawning
 - [ ] Different ability boosting pickups
 - [x] Floating healthbars on Enemy
 - [ ] UI/UX + Visual Effects update
+- [ ] Grenade planting ability for player
 
 ## Credits & Attributions
 
