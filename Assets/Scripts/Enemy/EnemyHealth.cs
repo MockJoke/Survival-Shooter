@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,6 +25,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private EnemyMovement enemyMovement;
     [SerializeField] private SkinnedMeshRenderer bodyMeshRenderer;
     
+    private Camera cameraMain;
     private static readonly int deadAnim = Animator.StringToHash("Dead");
 
     void Awake()
@@ -35,9 +35,6 @@ public class EnemyHealth : MonoBehaviour
         
         if (enemyAudio == null)
             enemyAudio = GetComponent<AudioSource>();
-        
-        // if (hitParticles == null)
-        //     hitParticles = GetComponentInChildren<ParticleSystem>();
         
         if (capsuleCollider == null)
             capsuleCollider = GetComponent<CapsuleCollider>();
@@ -51,7 +48,12 @@ public class EnemyHealth : MonoBehaviour
         if (bodyMeshRenderer == null)
             bodyMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
     }
-
+    
+    void Start()
+    {
+        cameraMain = Camera.main;
+    }
+    
     void OnEnable()
     {
         currentHealth = initHealth;
@@ -75,17 +77,6 @@ public class EnemyHealth : MonoBehaviour
     
     public void TakeDamage(int amount, Vector3 hitPoint)
     {
-        // If the enemy is dead...
-        // if(isDead)
-            // ... no need to take damage so exit the function
-            // return;
-
-        // Play the hurt sound effect
-        // enemyAudio.Play();
-
-        // Reduce the current health by the amount of damage sustained
-        // currentHealth -= amount;
-        
         ApplyDamage(amount);
         
         // Set the position of the particle system to where the hit was sustained
@@ -93,13 +84,6 @@ public class EnemyHealth : MonoBehaviour
 
         // And play the particles
         hitParticles.Play();
-
-        // If the current health is less than or equal to zero...
-        // if(currentHealth <= 0)
-        // {
-        //     // ... the enemy is dead
-        //     Death();
-        // }
     }
     
     public void TakeDamage(int amount)
@@ -111,7 +95,9 @@ public class EnemyHealth : MonoBehaviour
     {
         if (!IsDead())
         {
+            // Play the hurt sound effect
             enemyAudio.Play();
+            
             currentHealth -= amount;
             
             healthBarSlider.gameObject.SetActive(true);
@@ -126,9 +112,6 @@ public class EnemyHealth : MonoBehaviour
     
     void Death()
     {
-        // The enemy is dead
-        // isDead = true;
-        
         // Tell the animator that the enemy is dead
         anim.SetTrigger(deadAnim);
         
@@ -146,7 +129,6 @@ public class EnemyHealth : MonoBehaviour
         capsuleCollider.isTrigger = true;
         
         // Increase the score by the enemy's score value
-        // ScoreManager.score += scoreValue;
         ScoreManager.OnScoreChange(scoreValue);
         
         Destroy(healthBarSlider.gameObject);
@@ -176,9 +158,9 @@ public class EnemyHealth : MonoBehaviour
 
     private void UpdateHealthBarPos()
     {
-        if (Camera.main != null)
+        if (cameraMain != null)
         {
-            Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+            Vector3 screenPos = cameraMain.WorldToScreenPoint(transform.position);
             healthBarSlider.transform.position = screenPos + new Vector3(0, 100, 0);
         }
     }
