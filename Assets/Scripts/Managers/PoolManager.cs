@@ -128,10 +128,12 @@ public class Pool
         pool.Add(UnityEngine.Object.Instantiate(poolObject));
         pool[index].name = poolObject.name + "_" + index.ToString().PadLeft(4, '0');
         pool[index].SetActive(keepActive);
+        
         if (parentingGroup != null)
         {
             pool[index].transform.parent = parentingGroup;
         }
+        
         return pool[index];
     }
 }

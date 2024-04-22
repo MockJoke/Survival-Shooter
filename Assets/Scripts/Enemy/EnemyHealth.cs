@@ -25,7 +25,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private EnemyMovement enemyMovement;
     [SerializeField] private SkinnedMeshRenderer bodyMeshRenderer;
     
-    private Camera cameraMain;
+    private Camera mainCamera;
     private static readonly int deadAnim = Animator.StringToHash("Dead");
 
     void Awake()
@@ -51,7 +51,7 @@ public class EnemyHealth : MonoBehaviour
     
     void Start()
     {
-        cameraMain = Camera.main;
+        mainCamera = Camera.main;
     }
     
     void OnEnable()
@@ -68,6 +68,16 @@ public class EnemyHealth : MonoBehaviour
         {
             UpdateHealthBarPos();
         }
+    }
+
+    public void SetInitHealthBasedOnDifficulty(int diffFactor)
+    {
+        initHealth *= diffFactor;
+    }
+    
+    public void SetScoreValueBasedOnDifficulty(int diffFactor)
+    {
+        scoreValue *= diffFactor;
     }
     
     public bool IsDead()
@@ -151,6 +161,8 @@ public class EnemyHealth : MonoBehaviour
         // Change the audio clip of the audio source to the burn clip and play it (this will stop the death clip playing)
         enemyAudio.clip = burnClip;
         enemyAudio.Play();
+
+        WaveManager.DeduceAliveEnemies();
         
         // After 2 seconds destroy the enemy
         Destroy(gameObject, 1.5f);
@@ -158,9 +170,9 @@ public class EnemyHealth : MonoBehaviour
 
     private void UpdateHealthBarPos()
     {
-        if (cameraMain != null)
+        if (mainCamera != null)
         {
-            Vector3 screenPos = cameraMain.WorldToScreenPoint(transform.position);
+            Vector3 screenPos = mainCamera.WorldToScreenPoint(transform.position);
             healthBarSlider.transform.position = screenPos + new Vector3(0, 100, 0);
         }
     }
