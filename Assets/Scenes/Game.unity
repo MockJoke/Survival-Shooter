@@ -159,7 +159,10 @@ MonoBehaviour:
   enemy: {fileID: 153412, guid: 548c56f4bcf4db24b8aa057e9846a005, type: 3}
   spawnTime: 15
   spawnPoints:
+  - {fileID: 345275349}
+  - {fileID: 1725468539}
   - {fileID: 933997770}
+  - {fileID: 1338697091}
 --- !u!114 &14871710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +179,10 @@ MonoBehaviour:
   enemy: {fileID: 100000, guid: ea3c2728ef33e3a4d99527a86cda6465, type: 3}
   spawnTime: 3
   spawnPoints:
+  - {fileID: 345275349}
   - {fileID: 1725468539}
+  - {fileID: 933997770}
+  - {fileID: 1338697091}
 --- !u!114 &14871711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,6 +200,9 @@ MonoBehaviour:
   spawnTime: 3
   spawnPoints:
   - {fileID: 345275349}
+  - {fileID: 1725468539}
+  - {fileID: 933997770}
+  - {fileID: 1338697091}
 --- !u!4 &14871712
 Transform:
   m_ObjectHideFlags: 0
@@ -1086,7 +1095,7 @@ GameObject:
   m_Component:
   - component: {fileID: 345275349}
   m_Layer: 0
-  m_Name: ZomBunnySpawnPoint
+  m_Name: SpawnPoint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1105,6 +1114,41 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
+  m_Father: {fileID: 385587810}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &385587809
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 385587810}
+  m_Layer: 0
+  m_Name: SpawnPoints
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &385587810
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385587809}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 345275349}
+  - {fileID: 1725468539}
+  - {fileID: 933997770}
+  - {fileID: 1338697091}
   m_Father: {fileID: 1008526691}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &432404252
@@ -2694,7 +2738,7 @@ GameObject:
   m_Component:
   - component: {fileID: 933997770}
   m_Layer: 0
-  m_Name: HellephantSpawnPoint
+  m_Name: SpawnPoint3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2709,11 +2753,11 @@ Transform:
   m_GameObject: {fileID: 933997769}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.90630776, z: -0, w: -0.42261833}
-  m_LocalPosition: {x: 0, y: 0, z: 32}
+  m_LocalPosition: {x: -0.5, y: 0, z: 33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1008526691}
+  m_Father: {fileID: 385587810}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &952144722
 GameObject:
@@ -2897,9 +2941,7 @@ Transform:
   m_Children:
   - {fileID: 1434239555}
   - {fileID: 1993802042}
-  - {fileID: 345275349}
-  - {fileID: 1725468539}
-  - {fileID: 933997770}
+  - {fileID: 385587810}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1019110511
@@ -3817,6 +3859,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1334548029}
   m_CullTransparentMesh: 0
+--- !u!1 &1338697090
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1338697091}
+  m_Layer: 0
+  m_Name: SpawnPoint4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1338697091
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338697090}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.90630776, z: -0, w: -0.42261833}
+  m_LocalPosition: {x: 11.05, y: 0, z: 22.42}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 385587810}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1346554544
 GameObject:
   m_ObjectHideFlags: 0
@@ -4626,7 +4699,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1725468539}
   m_Layer: 0
-  m_Name: ZomBearSpawnPoint
+  m_Name: SpawnPoint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4645,7 +4718,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1008526691}
+  m_Father: {fileID: 385587810}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1776511254
 GameObject:
