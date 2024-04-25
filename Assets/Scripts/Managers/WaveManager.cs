@@ -40,7 +40,7 @@ public class WaveManager : MonoBehaviour
     private Vector3 spawnPosition = Vector3.zero;		// pos at which the enemy will be spawned
     private int currWaveNumber;
     private float timer; 
-    private Wave currentWave;
+    private Wave currWave;
     private int noOfSpawnedEnemies = 0;
     private int totalEnemiesToSpawn;
     private bool shouldSpawn = false;
@@ -91,7 +91,7 @@ public class WaveManager : MonoBehaviour
 		{
 			// Spawn one enemy from each of the entries in this wave
             // The difficulty multiplies the number of spawned enemies for each loop, that is each full run through all the waves
-			foreach (Wave.Entry entry in currentWave.entries) 
+			foreach (Wave.Entry entry in currWave.entries) 
 			{
 				if (entry.spawnedEnemiesCount < (entry.enemiesToSpawnCount * difficulty)) 
 				{
@@ -118,12 +118,12 @@ public class WaveManager : MonoBehaviour
 			difficulty++;
 		}
 
-		currentWave = waves[currWaveNumber];
+		currWave = waves[currWaveNumber];
 
-        // The difficulty multiplies the number of spawned enemies for each
-        // "loop", that is each full run through all the waves.
+        // The difficulty multiplies the number of spawned enemies for each loop
+        // that is each full run through all the waves
         totalEnemiesToSpawn = 0;
-		foreach (Wave.Entry entry in currentWave.entries) 
+		foreach (Wave.Entry entry in currWave.entries) 
 		{
 			totalEnemiesToSpawn += (entry.enemiesToSpawnCount * difficulty);
 		}
@@ -165,14 +165,6 @@ public class WaveManager : MonoBehaviour
 		waveNoText.transform.localScale = new Vector3(s, s, s);
 	}
 	
-	/**
-	 * Spawn enemies.
- 	 * 
-	 * This method is called at regular intervals, but all the ways this function 
-	 * can end up not spawning an enemy means it could be many intervals between each 
-	 * actual spawn and our enemies will spawn very irregularly. I guess that just 
-	 * makes it seem more random though
-	 */
 	void Spawn(Wave.Entry entry) 
 	{
 		// Reset the timer
@@ -184,10 +176,11 @@ public class WaveManager : MonoBehaviour
 			return;
 		}
 
-		GameObject enemy = spawnAccToCameraBlindSpots ? SpawnBasedOnCameraBlindSpots(entry.enemy) : SpawnBasedOnSpawnPoints(entry.enemy);
-
-		if (enemy == null)
-			return;
+		GameObject enemy = null;
+		while (!enemy)
+		{
+			enemy = spawnAccToCameraBlindSpots ? SpawnBasedOnCameraBlindSpots(entry.enemy) : SpawnBasedOnSpawnPoints(entry.enemy);
+		}
 		
 		// Multiply health and score value by the current difficulty.
 		enemy.GetComponent<EnemyHealth>().SetInitHealthBasedOnDifficulty(difficulty);
