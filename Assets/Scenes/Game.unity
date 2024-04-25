@@ -3493,7 +3493,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1139190131}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 1851598981}
@@ -6187,7 +6187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 176715526}
   bufferDistance: 200
-  timeBetweenWaves: 3.5
+  timeBwWaves: 3.5
   spawnTime: 0.5
   startingWave: 3
   startingDifficulty: 1
@@ -6245,7 +6245,7 @@ MonoBehaviour:
       enemiesToSpawnCount: 50
     - enemy: {fileID: 153412, guid: 548c56f4bcf4db24b8aa057e9846a005, type: 3}
       enemiesToSpawnCount: 5
-  spawnAccToCameraBlindSpots: 0
+  spawnAccToCameraBlindSpots: 1
   spawnPoints:
   - {fileID: 345275349}
   - {fileID: 1725468539}
