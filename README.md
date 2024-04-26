@@ -19,11 +19,12 @@ A simple 3D survival shooter game made using Unity Engine
 - [x] Add home & pause screens
 - [ ] Upgrade to new input system
 - [x] Wave based enemy spawning
-- [ ] Add proper bullets instead of a line renderer based shooting
+- [x] Add bullets based player shooting
 - [ ] Different ability boosting pickups
-- [x] Floating healthbars on Enemy
+- [x] Floating health-bars on Enemy
 - [ ] UI/UX + Visual Effects update
 - [ ] Grenade planting ability for player
+- [ ] Enemy AI for Boss
 
 ## Credits & Attributions
 
