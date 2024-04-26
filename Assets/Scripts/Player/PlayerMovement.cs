@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnitySampleAssets.CrossPlatformInput;
 
 public class PlayerMovement : MonoBehaviour
@@ -10,9 +11,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody playerRigidbody;          // Reference to the player's rigidbody
     
     private Vector3 movement;                                   // The vector to store the direction of the player's movement
+    private static readonly int walkingAnim = Animator.StringToHash("IsWalking");
     
 #if !MOBILE_INPUT
-    private int floorMask;                                      // A layer mask so that a ray can be cast just at gameobjects on the floor layer
+    [SerializeField] private LayerMask floorMask;                                      // A layer mask so that a ray can be cast just at gameobjects on the floor layer
     private readonly float camRayLength = 100f;                 // The length of the ray from the camera into the scene
 #endif
 
@@ -20,7 +22,8 @@ public class PlayerMovement : MonoBehaviour
     {
 #if !MOBILE_INPUT
         // Create a layer mask for the floor layer
-        floorMask = LayerMask.GetMask("Floor");
+        if (floorMask == Decimal.Zero)
+            floorMask = LayerMask.GetMask("Floor");
 #endif
 
         // Set up references
@@ -78,10 +81,10 @@ public class PlayerMovement : MonoBehaviour
             playerToMouse.y = 0f;
 
             // Create a quaternion (rotation) based on looking down the vector from the player to the mouse
-            Quaternion newRotatation = Quaternion.LookRotation(playerToMouse);
+            Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
 
             // Set the player's rotation to this new rotation
-            playerRigidbody.MoveRotation(newRotatation);
+            playerRigidbody.MoveRotation(newRotation);
         }
 #else
 
@@ -110,6 +113,6 @@ public class PlayerMovement : MonoBehaviour
         bool walking = h != 0f || v != 0f;
 
         // Tell the animator whether or not the player is walking
-        anim.SetBool("IsWalking", walking);
+        anim.SetBool(walkingAnim, walking);
     }
 }

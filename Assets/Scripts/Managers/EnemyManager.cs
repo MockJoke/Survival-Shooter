@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
+[Obsolete]
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private PlayerHealth playerHealth;       // Reference to the player's health
