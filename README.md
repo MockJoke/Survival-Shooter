@@ -4,7 +4,7 @@ A simple 3D survival shooter game made using Unity Engine
 
 ## Demo
 
-[//]: # ([Play on itch]&#40;https://mockjoke.itch.io/pixel-adventure&#41;)
+[Download from itch](https://kharva.itch.io/survival-shooter)
 
 <p align="center">
     <img src="README-Resources/Gameplay.png" alt="Start-Screen" width="500px">
@@ -25,12 +25,13 @@ A simple 3D survival shooter game made using Unity Engine
 - [ ] UI/UX + Visual Effects update
 - [ ] Grenade planting ability for player
 - [ ] Enemy AI for Boss
+- [ ] Dissolve effect for enemy death
 
 ## Credits & Attributions
 
-### Art Assets:
+### Utilities:
 
-[//]: # (- [PixelAdventure]&#40;https://pixelfrog-assets.itch.io/pixel-adventure-1&#41;)
+- https://assetstore.unity.com/packages/tools/animation/leantween-3595
 
 ### Disclaimer
 
