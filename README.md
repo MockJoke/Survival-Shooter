@@ -29,7 +29,7 @@ A simple 3D survival shooter game made using Unity Engine
 
 ## Credits & Attributions
 
-### Utilities:
+#### Utilities:
 
 - https://assetstore.unity.com/packages/tools/animation/leantween-3595
 
