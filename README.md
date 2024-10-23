@@ -12,6 +12,12 @@ A simple 3D survival shooter game made using Unity Engine
 [//]: # (    <img src="README-Resources/CharacterSelection-Menu.png" alt="CharacterSelection-Menu" width="300px">)
 </p>
 
+<br>
+
+<div align="center">
+  <a href="https://youtu.be/GQFlctD-W1s" target="_blank">Demo Video</a>
+</div>
+
 ## Features
 
 ### TODO:
